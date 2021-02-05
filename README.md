@@ -4,7 +4,7 @@ Set vim for python development
 让vim适合python开发
 
 # 功能
-- 代码高亮等
+- 代码高亮、跳转等
 - 自动补全
 
 # 参考
@@ -904,3 +904,7 @@ $ vim ./third_party/ycmd/cpp/ycm/CMakeLists.txt
 
 最后重新进入vim，在命令模式下输入PluginInstall，把YouCompleteMe插件也安装上。
 
+# 一些功能的快捷键举例
+* 代码跳转：光标放到函数上，然后依次按下```\gd```
+* 窗口切换：依次按下```]b```或者```[b```
+* ...
