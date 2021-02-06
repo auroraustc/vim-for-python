@@ -3,6 +3,22 @@ Set vim for python development
 
 让vim适合python开发
 
+# 目录
+- [功能](#功能)
+- [参考](#参考)
+- [开始操作](#开始操作)
+  - [需要提前准备的环境](#需要提前准备的环境)
+  - [Python 3.8](#python-38)
+  - [ncurses](#ncurses)
+  - [vim 8.2](#vim-82)
+  - [ctags](#ctags)
+  - [安装一部分vim插件](#安装一部分vim插件)
+  - [自动补全插件YouCompleteMe](#自动补全插件youcompleteme)
+- [一些功能的快捷键举例](#一些功能的快捷键举例)
+- [使用ipdb单步调试](#使用ipdb单步调试)
+  - [安装ipdb](#安装ipdb)
+  - [常用指令](#常用指令)
+
 # 功能
 - 代码高亮、跳转等
 - 自动补全
@@ -130,7 +146,8 @@ export PATH=/home/user1/soft/ctags/install/bin/:$PATH
 $ mkdir -p  ~/.vim/bundle
 $ git clone https://github.com/VundleVim/Vundle.vim.git  ~/.vim/bundle/Vundle.vim
 # 打开~/.vimrc进行初步的设置
-$ vim ~/.vimrc```
+$ vim ~/.vimrc
+```
 先设置成paste模式，按键shift+;进入命令模式，然后输入set paste，回车。之后把下面这些粘贴进去
 ```bash
 set nocompatible              " be iMproved, required
@@ -908,3 +925,36 @@ $ vim ./third_party/ycmd/cpp/ycm/CMakeLists.txt
 * 代码跳转：光标放到函数上，然后依次按下```\gd```
 * 窗口切换：依次按下```]b```或者```[b```
 * ...
+
+# 使用ipdb单步调试
+## 安装ipdb
+```bash
+python3 -m pip install ipdb --user
+```
+或者也可以在virtualenv中安装，可以避免一些冲突，也不需要--user了：
+```bash
+python3 -m virtualenv env_name
+source env_name/bin/activate
+python3 -m pip install ipdb
+# 使用deactivate退出virtualenv
+```
+## 常用指令
+cmd [X]代表指令cmd后面可以接参数x：```cmd X```
+
+指令| 功能
+--- | :---:
+h(elp) [指令] | 显示指定指令的帮助
+run [参数] | 开始运行，可以指定运行参数
+r(eturn) | 继续运行，直到当前函数返回
+c(ont(inue)) | 继续运行，直到断点
+n(ext) | 逐行执行
+s(tep) | 逐行执行，碰到函数会进入
+a(rgs) | 显示当前所处函数的参数
+p 表达式 | 打印表达式的值
+l(ist) [n[,m]] | 打印第n到m行，不指定参数默认打印10行
+w(here)  | 显示运行到哪儿
+b(ack)t(race) | 显示call stack
+u(p) [n] | 从当前所处frame上移n级
+d(own) [n] | 从当前所处frame下移n级
+b(reak) 文件名:行数 | 在文件的指定行设置断点
+cl(ear) [断点序号] | 删除指定（或所有）的断点
