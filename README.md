@@ -939,7 +939,21 @@ python3 -m pip install ipdb
 # 使用deactivate退出virtualenv
 ```
 ## 常用指令
-cmd [X]代表指令cmd后面可以接参数x：```cmd X```
+中括号代表指令后可以接参数```X```，也可以不接，比如：
+```bash
+# 显示源代码中指定的行
+# 当前行上下5行
+list 
+# 第10行的上下5行
+list 10
+# 第10行到第20行
+list 10,20
+```
+没有中括号代表必须接参数```X```，比如：
+```bash
+# 打印sys.argv的值
+p sys.argv
+```
 
 指令| 功能
 --- | :---:
@@ -951,7 +965,7 @@ n(ext) | 逐行执行
 s(tep) | 逐行执行，碰到函数会进入
 a(rgs) | 显示当前所处函数的参数
 p 表达式 | 打印表达式的值
-l(ist) [n[,m]] | 打印第n到m行，不指定参数默认打印10行
+l(ist) [n[,m]] | 打印源代码第n到m行，不指定参数默认打印10行
 w(here)  | 显示运行到哪儿
 b(ack)t(race) | 显示call stack
 u(p) [n] | 从当前所处frame上移n级
