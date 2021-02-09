@@ -1,4 +1,6 @@
+
 # vim-for-python
+
 Set vim for python development
 
 让vim适合python开发
@@ -7,17 +9,19 @@ Set vim for python development
 - [功能](#功能)
 - [参考](#参考)
 - [开始操作](#开始操作)
-  - [需要提前准备的环境](#需要提前准备的环境)
-  - [Python 3.8](#python-38)
-  - [ncurses](#ncurses)
-  - [vim 8.2](#vim-82)
-  - [ctags](#ctags)
-  - [安装一部分vim插件](#安装一部分vim插件)
-  - [自动补全插件YouCompleteMe](#自动补全插件youcompleteme)
+    - [需要提前准备的环境](#需要提前准备的环境)
+    - [Python 3.8](#python-38)
+    - [ncurses](#ncurses)
+    - [vim 8.2](#vim-82)
+    - [ctags](#ctags)
+    - [安装一部分vim插件](#安装一部分vim插件)
+    - [自动补全插件YouCompleteMe](#自动补全插件youcompleteme)
+        - [clang-completer](#clang-completer)
+        - [clangd-completer](#clangd-completer)
 - [一些功能的快捷键举例](#一些功能的快捷键举例)
 - [使用ipdb单步调试](#使用ipdb单步调试)
-  - [安装ipdb](#安装ipdb)
-  - [常用指令](#常用指令)
+    - [安装ipdb](#安装ipdb)
+    - [常用指令](#常用指令)
 
 # 功能
 - 代码高亮、跳转等
@@ -30,15 +34,15 @@ Set vim for python development
 # 开始操作
 ## 需要提前准备的环境
 * Python 3.8
-  * YouCompleteMe插件需要较高版本的Python 3.6+。考虑到可能会使用multiprocessing，建议使用Python 3.8+
+    * YouCompleteMe插件需要较高版本的Python 3.6+。考虑到可能会使用multiprocessing，建议使用Python 3.8+
 * ncurses
-  * 编译vim需要的依赖
+    * 编译vim需要的依赖
 * vim 8.2及以上
-  * YouCompleteMe的需求
+    * YouCompleteMe的需求
 * ctags
-  * vim一些插件需要的依赖
+    * vim一些插件需要的依赖
 * libclang
-  * YouCompleteMe需要的依赖
+    * YouCompleteMe需要的依赖
 
 ## Python 3.8
 可自行编译，也可以用系统自带的Python。如果使用系统自带的Python，确保python3-dev也已经安装过了（一般都有）。
@@ -80,7 +84,7 @@ export CPLUS_INCLUDE_PATH=/home/user1/soft/ncurses-6.2/install/include/:$CPLUS_I
 $ source ~/.bashrc
 ```
 
-## vim 8.2 
+## vim 8.2
 ```bash
 $ git clone https://github.com/vim/vim
 $ cd vim
@@ -88,11 +92,11 @@ $ mkdir install
 $ cd install
 $ VIM_INSTALL_DIR=$(pwd)
 $ cd ../
-$ ./configure --prefix=$VIM_INSTALL_DIR --enable-luainterp=yes \ 
-  --enable-mzschemeinterp --enable-perlinterp=yes  --enable-python3interp=yes \ 
-  --enable-tclinterp=yes --enable-rubyinterp=yes --enable-cscope --enable-terminal \ 
-  --enable-autoservername --enable-multibyte --enable-xim --enable-fontset \ 
-  --with-modified-by=shlian --with-compiledby=shlian  \ 
+$ ./configure --prefix=$VIM_INSTALL_DIR --enable-luainterp=yes \
+  --enable-mzschemeinterp --enable-perlinterp=yes  --enable-python3interp=yes \
+  --enable-tclinterp=yes --enable-rubyinterp=yes --enable-cscope --enable-terminal \
+  --enable-autoservername --enable-multibyte --enable-xim --enable-fontset \
+  --with-modified-by=shlian --with-compiledby=shlian  \
   --with-python3-command=python3
 # 不要在anaconda的base环境下configure，不然可能会报类似的错误：
 # lto1: fatal error: bytecode stream in file ‘/home/user1/soft/anaconda3/lib/python3.8/config-3.8-x86_64-linux-gnu/libpython3.8.a’ generated with LTO version 6.0 instead of the expected 8.1。先conda deactivate再configure
@@ -193,10 +197,10 @@ highlight ColorColumn ctermbg=darkgray
 set colorcolumn=140
 
 " 高亮显示当前行
-set cursorline 
+set cursorline
   "red（红），white（白），black（黑），green（绿），yellow（黄），blue（蓝），purple（紫），gray（灰），brown（棕），tan(褐色)，syan(青色)
 hi CursorLine   cterm=NONE ctermbg=darkgray ctermfg=NONE
-"hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white 
+"hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white
 
 set ruler " 打开状态栏标尺
 set shiftwidth=4 " 设定 << 和 >> 命令移动时的宽度为 4
@@ -230,7 +234,7 @@ set foldenable " 开启折叠
 "set foldmethod=syntax " 设置语法折叠************************
 set foldcolumn=0 " 设置折叠区域的宽度
 setlocal foldlevel=1 " 设置折叠层数为
-"set foldclose=all " 设置为自动关闭折叠 
+"set foldclose=all " 设置为自动关闭折叠
 nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
 " 用空格键来开关折叠
 
@@ -320,8 +324,8 @@ autocmd FileType python map <F12> :!python %<CR>
 " 选中状态下 Ctrl+c 复制
 "vmap <C-c> "+y
 
-"十六进制显示文件 
-nmap <leader>H :%!xxd<CR>     
+"十六进制显示文件
+nmap <leader>H :%!xxd<CR>    
 "二进制显示文件
 nmap <leader>B :%!xxd -r<CR>
 
@@ -330,18 +334,18 @@ nmap <leader>B :%!xxd -r<CR>
 set rtp+=~/.vim/bundle/Vundle.vim
 
 call vundle#begin()
-	filetype plugin indent on    " 必须加载vim自带和插件相应的语法和文件类型相关脚本
+    filetype plugin indent on    " 必须加载vim自带和插件相应的语法和文件类型相关脚本
 
-	"vim包管理工具
-	Plugin 'gmarik/Vundle.vim'
+    "vim包管理工具
+    Plugin 'gmarik/Vundle.vim'
 
-	"文件目录增加git 状态
-	Plugin 'Xuyuanp/nerdtree-git-plugin'
-	
-	"tab智能补全
-	Plugin 'ervandew/supertab'
+    "文件目录增加git 状态
+    Plugin 'Xuyuanp/nerdtree-git-plugin'
+   
+    "tab智能补全
+    Plugin 'ervandew/supertab'
 
-	"代码可视化缩进块
+    "代码可视化缩进块
     Plugin 'yggdroot/indentline'
         let g:indentLine_enabled = 1
         let g:indentLine_color_term = 230
@@ -349,56 +353,56 @@ call vundle#begin()
         let g:indentLine_char_list = ['|', '¦', '¦', '¦']
 
 
-	"彩虹括号
-	Plugin 'kien/rainbow_parentheses.vim'
+    "彩虹括号
+    Plugin 'kien/rainbow_parentheses.vim'
 
-	"真彩色
-	Plugin 'tpope/vim-sensible'
+    "真彩色
+    Plugin 'tpope/vim-sensible'
 
-	"git左边栏增删改提示
-	Plugin 'airblade/vim-gitgutter'
+    "git左边栏增删改提示
+    Plugin 'airblade/vim-gitgutter'
 
     Plugin 'altercation/solarized'
-	Plugin 'altercation/vim-colors-solarized'  "solarized
-	    let g:solarized_termtrans  = 1         " 使用 termnal 背景
-	    let g:solarized_visibility = "high"    " 使用 :set list 显示特殊字符时的高亮级别
+    Plugin 'altercation/vim-colors-solarized'  "solarized
+        let g:solarized_termtrans  = 1         " 使用 termnal 背景
+        let g:solarized_visibility = "high"    " 使用 :set list 显示特殊字符时的高亮级别
 
-	    " GUI 模式浅色背景，终端模式深色背景
-	    if has('gui_running')
-			set background=light
-	    else
-			set background=dark
-	    endif
-	    " 主题设置为 solarized
-		"colorscheme solarized
+        " GUI 模式浅色背景，终端模式深色背景
+        if has('gui_running')
+            set background=light
+        else
+            set background=dark
+        endif
+        " 主题设置为 solarized
+        "colorscheme solarized
 
-	"文件目录分屏
-	Plugin 'scrooloose/nerdtree'
-		let NERDTreeHighlightCursorline = 1       " 高亮当前行
-		let NERDTreeShowLineNumbers     = 1       " 显示行号
-		" 忽略列表中的文件
-		let NERDTreeIgnore = [ '\.pyc$', '\.pyo$', '\.obj$', '\.o$', '\.egg$', '^\.git$', '^\.repo$', '^\.svn$', '^\.hg$' ]
-		" 启动 vim 时打开 NERDTree
-		"autocmd vimenter * NERDTree
-		" 当打开 VIM，没有指定文件时和打开一个目录时，打开 NERDTree
-		"autocmd StdinReadPre * let s:std_in = 1
-		"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-		"autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
-		" 关闭 NERDTree，当没有文件打开的时候
-		"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | end
-        
-		" <leader>nt 打开 nerdtree 窗口，在左侧栏显示
-		map <leader>nt :NERDTreeToggle<CR>
-		" <leader>tc 关闭当前的 tab
-		map <leader>tc :tabc<CR>
-		" <leader>to 关闭所有其他的 tab
-		map <leader>to :tabo<CR>
-		" <leader>ts 查看所有打开的 tab
-		map <leader>ts :tabs<CR>
-		" <leader>tp 前一个 tab
-		map <leader>tp :tabp<CR>
-		" <leader>tn 后一个 tab
-		map <leader>tn :tabn<CR
+    "文件目录分屏
+    Plugin 'scrooloose/nerdtree'
+        let NERDTreeHighlightCursorline = 1       " 高亮当前行
+        let NERDTreeShowLineNumbers     = 1       " 显示行号
+        " 忽略列表中的文件
+        let NERDTreeIgnore = [ '\.pyc$', '\.pyo$', '\.obj$', '\.o$', '\.egg$', '^\.git$', '^\.repo$', '^\.svn$', '^\.hg$' ]
+        " 启动 vim 时打开 NERDTree
+        "autocmd vimenter * NERDTree
+        " 当打开 VIM，没有指定文件时和打开一个目录时，打开 NERDTree
+        "autocmd StdinReadPre * let s:std_in = 1
+        "autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+        "autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
+        " 关闭 NERDTree，当没有文件打开的时候
+        "autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | end
+       
+        " <leader>nt 打开 nerdtree 窗口，在左侧栏显示
+        map <leader>nt :NERDTreeToggle<CR>
+        " <leader>tc 关闭当前的 tab
+        map <leader>tc :tabc<CR>
+        " <leader>to 关闭所有其他的 tab
+        map <leader>to :tabo<CR>
+        " <leader>ts 查看所有打开的 tab
+        map <leader>ts :tabs<CR>
+        " <leader>tp 前一个 tab
+        map <leader>tp :tabp<CR>
+        " <leader>tn 后一个 tab
+        map <leader>tn :tabn<CR
 
     "tagbar
     Plugin 'majutsushi/tagbar'
@@ -407,7 +411,7 @@ call vundle#begin()
         let g:tagbar_autofocus = 1       " 打开 tagbar 时光标在 tagbar 页面内，默认在 vim 打开的文件内
         let g:tagbar_left      = 1       " 让 tagbar 在页面左侧显示，默认右边
         "let g:tagbar_sort      = 0       " 标签不排序，默认排序
-         
+        
         " <leader>tb 打开 tagbar 窗口，在左侧栏显示
         map <leader>tb :TagbarToggle<CR>
 
@@ -420,7 +424,7 @@ call vundle#begin()
         let Tlist_Use_Left_Window         = 1    " 在左侧窗口中显示
         let Tlist_File_Fold_Auto_Close    = 1    " 自动折叠
         let Tlist_Auto_Update             = 1    " 自动更新
-         
+        
         " <leader>tl 打开 Tlist 窗口，在左侧栏显示
          map <leader>tl :TlistToggle<CR>
 
@@ -464,24 +468,24 @@ call vundle#begin()
         map <leader>8 :b 8<CR>
         map <leader>9 :b 9<CR>
 
-        "Vim 在与屏幕/键盘交互时使用的编码(取决于实际的终端的设定)        
+        "Vim 在与屏幕/键盘交互时使用的编码(取决于实际的终端的设定)       
         set encoding=utf-8
         set langmenu=zh_CN.UTF-8
-        " 设置打开文件的编码格式  
-        set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1 
+        " 设置打开文件的编码格式 
+        set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
         set fileencoding=utf-8
         " 解决菜单乱码
         source $VIMRUNTIME/delmenu.vim
         source $VIMRUNTIME/menu.vim
         " 解决consle输出乱码
-        "set termencoding = cp936  
+        "set termencoding = cp936 
         " 设置中文提示
-        " language messages zh_CN.utf-8 
+        " language messages zh_CN.utf-8
         " 设置中文帮助
         set helplang=cn
         " 设置为双字宽显示，否则无法完整显示如:☆
         set ambiwidth=double
-        " 总是显示状态栏 
+        " 总是显示状态栏
         let laststatus = 2
         let g:airline_theme='solarized'      " 设置主题,simple、dark、solarized、bubblegum 详见.vim/bundle/vim-airline-themes
 
@@ -507,17 +511,17 @@ call vundle#begin()
         " 映射切换buffer的键位
         nnoremap [b :bp<CR>
         nnoremap ]b :bn<CR>
-        " 设置字体 
+        " 设置字体
         set guifont=Powerline_Consolas:h14:cANSI
 
     Plugin 'enricobacis/vim-airline-clock'
         "let g:airline#extensions#clock#auto = 0  关闭
         let g:airline#extensions#clock#format = '%H:%M:%S'
 
-    
+   
     ""代码动态检查(使用YCM自带的即可)
     "Plugin 'w0rp/ale'
-    "    let g:ale_lint_on_text_changed       = 'normal'                     " 代码更改后启动检查 
+    "    let g:ale_lint_on_text_changed       = 'normal'                     " 代码更改后启动检查
     "    let g:ale_lint_on_insert_leave       = 1                            " 退出插入模式即检查
     "    let g:ale_sign_column_always         = 1                            " 总是显示动态检查结果
     "    "let g:ale_statusline_format = ['✗ %d', '⚡%d','✔  OK']
@@ -526,7 +530,7 @@ call vundle#begin()
     "    let g:ale_echo_msg_error_str         = 'E'                          " 错误显示字符
     "    let g:ale_echo_msg_warning_str       = 'W'                          " 警告显示字符
     "    let g:ale_echo_msg_format            = '[%linter%] %s [%severity%]' " 告警显示格式
-    "     
+    "    
     "    " C 语言配置检查参数
     "    let g:ale_c_gcc_options              = '-Wall -Werror -O2 -std=c11'
     "    let g:ale_c_clang_options            = '-Wall -Werror -O2 -std=c11'
@@ -535,12 +539,12 @@ call vundle#begin()
     "    let g:ale_cpp_gcc_options            = '-Wall -Werror -O2 -std=c++14'
     "    let g:ale_cpp_clang_options          = '-Wall -Werror -O2 -std=c++14'
     "    let g:ale_cpp_cppcheck_options       = ''
-    "     
+    "    
     "    "使用clang对c和c++进行语法检查，对python使用pylint进行语法检查
     "    let g:ale_linters = {  'c++': ['clang', 'gcc'] }
     "    " <F9> 触发/关闭代码动态检查
     "    map <F9> :ALEToggle<CR>
-    "    "普通模式下，ak 前往上一个错误或警告，aj 前往下一个错误或警告                                                                                                                                                    
+    "    "普通模式下，ak 前往上一个错误或警告，aj 前往下一个错误或警告                                                                                                                                                   
     "    nmap ak <Plug>(ale_previous_wrap)
     "    nmap aj <Plug>(ale_next_wrap)
     "    " ad 查看错误或警告的详细信息
@@ -554,8 +558,8 @@ call vundle#begin()
 
     "显示文件修改痕迹
     Plugin 'chrisbra/changesPlugin'
+   
     
-     
     "Plugin 'bufexplorer'
 
     "浏览最近打开的文件
@@ -575,11 +579,11 @@ call vundle#begin()
     "Plugin 'Powerline'
     "Plugin 'rainbow_parentheses'
 
-    Plugin 'ludovicchabant/vim-gutentags' 
+    Plugin 'ludovicchabant/vim-gutentags'
         "gutentags搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归
-        
+       
         let g:gutentags_project_root = ['.root', '.svn', '.git', '.project']
-        
+       
         " 所生成的数据文件的名称 "
         let g:gutentags_ctags_tagfile = '.tags'
 
@@ -590,7 +594,7 @@ call vundle#begin()
          if !isdirectory(s:vim_tags)
             silent! call mkdir(s:vim_tags, 'p')
          endif
-        
+       
             " 配置 ctags 的参数 "
         let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
         let g:gutentags_ctags_extra_args += ['--c++-kinds=+pxI']
@@ -599,10 +603,10 @@ call vundle#begin()
     Plugin 'skywind3000/gutentags_plus'
         " gutentags搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归
         " let g:gutentags_project_root = ['.root', '.svn', '.git', '.project']
-        
+       
         " 所生成的数据文件的名称 "
         let g:gutentags_ctags_tagfile = '.tags'
-        
+       
         " 将自动生成的 tags 文件全部放入 ~/.cache/tags 目录中，避免污染工程目录
         let s:vim_tags = expand('~/.cache/tags')
         let g:gutentags_cache_dir = s:vim_tags
@@ -610,7 +614,7 @@ call vundle#begin()
         if !isdirectory(s:vim_tags)
            silent! call mkdir(s:vim_tags, 'p')
            endif
-        
+       
            " 配置 ctags 的参数 "
            let g:gutentags_ctags_extra_args = ['--fields=+niazS','--extra=+q']
            let g:gutentags_ctags_extra_args += ['--c++-kinds=+pxI']
@@ -665,8 +669,8 @@ call vundle#begin()
         ":FufQuickfix|     - Quickfix mode (|fuf-quickfix-mode|)
         ":FufLine|         - Line mode (|fuf-line-mode|)
         ":FufHelp|         - Help mode (|fuf-help-mode|)
-        
-    "doc    
+       
+    "doc   
     Plugin 'DoxygenToolkit.vim'
         ":Dox
         ":DoxAuthor
@@ -701,10 +705,10 @@ call vundle#begin()
 
     "显示所有的leader映射
     Plugin 'hecal3/vim-leader-guide'
-       ":LeaderGuide '\' 
-    
-    "cmake 
-    Plugin 'jansenm/vim-cmake'   
+       ":LeaderGuide '\'
+   
+    "cmake
+    Plugin 'jansenm/vim-cmake'  
 
     "Plugin 'ihacklog/hicursorwords'
     "    let g:HiCursorWords_delay = 200
@@ -732,28 +736,28 @@ call vundle#begin()
         "\cc 注释
         " Add spaces after comment delimiters by default
         let g:NERDSpaceDelims = 1
-        
+       
         " Use compact syntax for prettified multi-line comments
         let g:NERDCompactSexyComs = 1
-        
+       
         " Align line-wise comment delimiters flush left instead of following code indentation
         let g:NERDDefaultAlign = 'left'
-        
+       
         " Set a language to use its alternate delimiters by default
         let g:NERDAltDelims_java = 1
-        
+       
         " Add your own custom formats or override the defaults
         let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
-        
+       
         " Allow commenting and inverting empty lines (useful when commenting a region)
         let g:NERDCommentEmptyLines = 1
-        
+       
         " Enable trimming of trailing whitespace when uncommenting
         let g:NERDTrimTrailingWhitespace = 1
-        
-        " Enable NERDCommenterToggle to check all selected lines is commented or not 
+       
+        " Enable NERDCommenterToggle to check all selected lines is commented or not
         let g:NERDToggleCheckAllLines = 1
-        
+       
 
     "Plugin 'tpope/surround-vim'
 
@@ -791,8 +795,8 @@ call vundle#begin()
 
         "sub commands
         "YcmCompleter RefactorRename :重命名
-        "YcmCompleter GoToSymbol  
-        
+        "YcmCompleter GoToSymbol 
+       
         nnoremap <leader>go :YcmCompleter GoTo<CR> "跳转
         nnoremap <leader>gd :YcmCompleter GoToDefinitionElseDeclaration<CR> "跳转到定义或声明
         nnoremap <leader>gt :YcmCompleter GetType<CR> "get类型
@@ -804,7 +808,7 @@ call vundle#begin()
 
         nnoremap <F6> :YcmForceCompileAndDiagnostics<CR> "重新编译和诊断
         "nmap <F4> :YcmDiags<CR>  "F4进行诊断
-        
+       
         "nnoremap <leader>gl :YcmCompleter GoToDeclaration<CR> "跳转到声明
         "nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>  "跳转到定义
 
@@ -857,6 +861,8 @@ $ git clone https://github.com/ycm-core/YouCompleteMe.git
 $ cd YouCompleteMe
 $ git submodule update --init --recursive
 ```
+自动补全功能可以依靠clang-completer和clangd-completer，一下分别介绍安装方法，选其一即可。
+### clang-completer
 首先执行一下安装，直到屏幕上出现libclang的下载地址：
 ```bash
  $ ./install.py --all
@@ -917,6 +923,23 @@ $ vim ./third_party/ycmd/cpp/ycm/CMakeLists.txt
 ```bash
 ./install.py --clang-completer
 ```
+### clangd-completer
+首先执行一下安装，直到屏幕上出现clangd的下载地址：
+```bash
+ $ ./install.py --clangd-completer
+ # ......一些信息
+Downloading Clangd from xxx
+ # 上面的xxx就是我们需要下载的，我的电脑上是https://dl.bintray.com/ycm-core/clangd/clangd-11.0.0-x86_64-unknown-linux-gnu.tar.bz2
+ # 按ctrl+C终止。
+ $ ^C
+```
+然后去对应的地址下载这个文件，放到```~/.vim/bundle/YouCompleteMe/third_party/ycmd/third_party/clangd/cache/```这个目录下，然后重新安装：
+```bash
+$ cd ~/.vim/bundle/YouCompleteMe
+$ ./install.py --clangd-completer
+```
+等待完成即可。
+### clang-completer或clangd-completer安装完成之后
 等它安装完，打开~/.vimrc，把```”Plugin ‘Valloric/YouCompleteMe```这一行最开头的英文双引号```"```去掉，保存退出。
 
 最后重新进入vim，在命令模式下输入PluginInstall，把YouCompleteMe插件也安装上。
@@ -962,7 +985,7 @@ cl(ear) [断点序号] | 删除指定（或所有）的断点
 ```bash
 # 显示源代码中指定的行
 # 当前行上下5行
-$ list 
+$ list
 # 第10行的上下5行
 $ list 10
 # 第10行到第20行
