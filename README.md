@@ -628,7 +628,7 @@ call vundle#begin()
 
 
     "在needtree中显示文件图标
-    Plugin 'ryanoasis/vim-devicons'
+    " Plugin 'ryanoasis/vim-devicons'
 
     "c++ 语法高亮
     Plugin 'octol/vim-cpp-enhanced-highlight'
